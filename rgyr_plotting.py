@@ -34,5 +34,13 @@ for i in range(len(sel)):
 
 	scat_hist(time[:], datalist1[:,i], 'k', 'Time (ns)', 'RGYR ($\AA$)', '%02d.%s.%s' %(i, system, selection), 'RGYR', 100)
 
-hist2d(datalist1[:,0],datalist1[:,1], 'Column 1 RGYR ($\AA$)', 'Column 2 RGYR ($\AA$)', 100, '%s.%s' %(system, selection), 'RGYR', False)
+hist2d(datalist1[:,0],datalist1[:,1], 'Column 0 RGYR ($\AA$)', 'Column 1 RGYR ($\AA$)', 100, '%s.%s' %(system, selection), 'RGYR', False)
 
+# OTHER UTILITIES:
+#PLOTTING MULTIPLE LINES ON THE SAME FIGURE:
+plt.plot(time[:], datalist1[:,0], c='firebrick')
+plt.plot(time[:], datalist1[:,1], c='royalblue')
+plt.legend(['column 0', 'column 1'], bbox_to_anchor=(-0.05, 1.03, 1.1, .102), fontsize='10', loc=3, ncol=2, mode='expand', borderaxespad=0.)
+#plt.show()
+plt.savefig('two_lines.png')
+plt.close()
