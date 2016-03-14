@@ -7,7 +7,7 @@
 from fn_plotting import *
 
 dat1 = sys.argv[1]  
-system1 = sys.argv[2]
+system = sys.argv[2]
 
 sel = []
 sel.append(['protein','firebrick'])
@@ -24,14 +24,15 @@ for i in range(nSteps):
 	time[i] = i*0.002	# units of time in ns; each frame is separated by 0.002 ns 
 
 for i in range(len(sel)):
-	system = sel[i][0]
-	num = i
+	selection = sel[i][0]
 
-	plot_1d(time[:], datalist1[:,i], 'k', 'Time (ns)', 'RGYR ($\AA$)', '%02d.%s.%s' %(num, system1, system), 'RGYR')
+	plot_1d(time[:], datalist1[:,i], 'k', 'Time (ns)', 'RGYR ($\AA$)', '%02d.%s.%s' %(i, system, selection), 'RGYR')
 
-	hist1d(datalist1[:,i], 'RGYR ($\AA$)', 100, '%02d.%s.%s' %(num, system1, system), 'RGYR', False)
+	hist1d(datalist1[:,i], 'RGYR ($\AA$)', 100, '%02d.%s.%s' %(i, system, selection), 'RGYR', False)
 
-	hist1d(datalist1[:,i], 'RGYR ($\AA$)', 100, '%02d.%s.%s' %(num, system1, system), 'RGYR', True)
+	hist1d(datalist1[:,i], 'RGYR ($\AA$)', 100, '%02d.%s.%s' %(i, system, selection), 'RGYR', True)
 
-	scat_hist(time[:], datalist1[:,i], 'k', 'Time (ns)', 'RGYR ($\AA$)', '%02d.%s.%s' %(num, system1, system), 'RGYR', 100)
+	scat_hist(time[:], datalist1[:,i], 'k', 'Time (ns)', 'RGYR ($\AA$)', '%02d.%s.%s' %(i, system, selection), 'RGYR', 100)
+
+hist2d(datalist1[:,0],datalist1[:,1], 'Column 1 RGYR ($\AA$)', 'Column 2 RGYR ($\AA$)', 100, '%s.%s' %(system, selection), 'RGYR', False)
 
