@@ -4,7 +4,7 @@
 
 # PREAMBLE:
 
-from fn_plotting import *
+from plotting_functions import *
 
 dat1 = sys.argv[1]  
 system = sys.argv[2]

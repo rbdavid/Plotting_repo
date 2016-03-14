@@ -147,8 +147,8 @@ def hist2d(xdata, ydata, x_axis, y_axis, num_b, system, analysis, norm):
 	else:
 		cb1.set_label('Frequency')
 #	plt.title('Distribution of Base Pair interactions - %s-%s' %(base_a, base_b))
-	plt.xlim((0,8))
-	plt.ylim((0,8))
+#	plt.xlim((0,8))
+#	plt.ylim((0,8))
 	plt.xlabel(r'%s' %(x_axis), size=12)
 	plt.ylabel(r'%s' %(y_axis), size=12)
 	plt.savefig('%s.%s.hist2d.png' %(system, analysis))
