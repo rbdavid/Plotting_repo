@@ -2,7 +2,6 @@
 # USAGE:
 # from fn_plotting.py import *
 
-
 # PREAMBLE:
 
 import numpy as np
@@ -18,7 +17,6 @@ nullfmt = NullFormatter()
 # ----------------------------------------
 # PLOTTING SUBROUTINES
 
-#time evolution, line plot
 def plot_1d(xdata, ydata, color, x_axis, y_axis, system, analysis):
 	
 	""" Creates a 1D scatter/line plot:
@@ -47,15 +45,7 @@ def plot_1d(xdata, ydata, color, x_axis, y_axis, system, analysis):
 	plt.savefig('%s.%s.tevol.png' %(system,analysis))
 	plt.close()
 
-#	if average != False:
-#		avg = np.sum(ydata)/len(ydata)
-#		SD = stdev(ydata)
-#		SDOM = SD/sqrt(len(ydata))
-#		plt.axhline(avg, xmin=0.0, xmax=1.0, c='r')
-#		plt.figtext(0.775, 0.815, '%s, %s\n%6.4f $\\pm$ %6.4f %s \nSD = %4.3f %s' %(system,analysis,avg, SDOM,units,SD,units), bbox=dict(boxstyle='square', ec='r', fc='w'), fontsize=12)
 
-
-# histogram - 1D, bar
 def hist1d(data, x_axis, num_b, system, analysis, norm):
 	""" Creates a 1D histogram:
 
@@ -95,7 +85,6 @@ def hist1d(data, x_axis, num_b, system, analysis, norm):
 	patches = []
 
 
-# Combined plot of a 1D scatter plot and a 1D histogram
 def scat_hist(xdata, ydata, color, x_axis, y_axis, system, analysis, num_b):
 	""" Creates 1D scatter plot w/ a 1D histogram
 
