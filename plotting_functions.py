@@ -17,11 +17,11 @@ nullfmt = NullFormatter()
 # ----------------------------------------
 # PLOTTING SUBROUTINES
 
-def plot_1d(xdata, ydata, color, x_axis, y_axis, system, analysis):
+def plot_1d(xdata, ydata, color, x_axis, y_axis, system, analysis, average = False, t0 = 0, **kwargs):
 	
 	""" Creates a 1D scatter/line plot:
 
-	Usage: time_evol(xdata, ydata, color, x_axis, y_axis, system, analysis)
+	Usage: plot_1d(xdata, ydata, color, x_axis, y_axis, system, analysis, average = [False|True], t0 = 0)
 	
 	Arguments:
 	xdata, ydata: self-explanatory
@@ -29,19 +29,46 @@ def plot_1d(xdata, ydata, color, x_axis, y_axis, system, analysis):
 	x_axis, y_axis: strings to be used for the axis label
 	system: descriptor for the system that produced the data
 	analysis: descriptor for the analysis that produced the data
+	average: [False|True]; Default is False; if set to True, the function will calc the average, standard dev, and standard dev of mean of the y-data
+	t0: index to begin averaging from; Default is 0
 	
-	"""
+	kwargs:
+		xunits, yunits: string with correct math text describing the units for the x data
+		x_lim, y_lim: list w/ two elements, setting the limits of the x/y ranges of plot
+		plt_title: string to be added as the plot title
 
-	plt.plot(xdata, ydata, '%s' %(color))	# create the initial plot
-#	plt.show()
+	"""
+	# INITIATING THE PLOT...
+	plt.plot(xdata, ydata, '%s' %(color))
+
+	# READING IN KWARG DICTIONARY INTO SPECIFIC VARIABLES
+	for name, value in kwargs.items():
+		if name == 'xunits':
+			x_units = value
+			x_axis = '%s (%s)' %(x_axis, value)
+		elif name == 'yunits':
+			y_units = value
+			y_axis = '%s (%s)' %(y_axis, value)
+		elif name == 'x_lim':
+			plt.xlim(value)
+		elif name == 'y_lim':
+			plt.ylim(value)
+		elif name == 'plt_title':
+			plt.title(r'%s' %(value), size='14')
+	
 	plt.grid(b=True, which='major', axis='both', color='#808080', linestyle='--')
-#	plt.show()
-#	plt.title(r'something here...' %(system), size='14')
 	plt.xlabel(r'%s' %(x_axis), size=12)
 	plt.ylabel(r'%s' %(y_axis), size=12)
-#	plt.show()
-#	plt.xlim((0,200))
-#	plt.ylim((1.5, 3.0))
+
+	# CALCULATING THE AVERAGE/SD/SDOM OF THE Y-DATA
+	if average != False:
+		avg = np.sum(ydata[t0:])/len(ydata[t0:])
+		SD = stdev(ydata[t0:])
+		SDOM = SD/sqrt(len(ydata[t0:]))
+
+		plt.axhline(avg, xmin=0.0, xmax=1.0, c='r')
+		plt.figtext(0.775, 0.815, '%s\n%6.4f $\\pm$ %6.4f %s \nSD = %4.3f %s' %(analysis, avg, SDOM, y_units, SD, y_units), bbox=dict(boxstyle='square', ec='r', fc='w'), fontsize=12)
+
 	plt.savefig('%s.%s.tevol.png' %(system,analysis))
 	plt.close()
 
