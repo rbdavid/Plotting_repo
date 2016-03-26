@@ -30,11 +30,11 @@ for i in range(len(sel)):
 	
 	plot_1d(time[:], datalist1[:,i], 'k', 'Time', 'RGYR', '%02d.%s.%s' %(i, system, selection), 'RGYR', average = True, xunits = 'ns', yunits = '$\AA$')
 
-	hist1d(datalist1[:,i], 'RGYR', 100, '%02d.%s.%s' %(i, system, selection), 'RGYR', xunits = '$\AA$')
+	hist1d(datalist1[:,i], 'RGYR', '%02d.%s.%s' %(i, system, selection), 'RGYR', num_b = 100, xunits = '$\AA$')
 
-	hist1d(datalist1[:,i], 'RGYR', 100, '%02d.%s.%s' %(i, system, selection), 'RGYR', norm = True, average = True, xunits = '$\AA$')
+	hist1d(datalist1[:,i], 'RGYR', '%02d.%s.%s' %(i, system, selection), 'RGYR', num_b = 100, norm = True, average = True, xunits = '$\AA$')
 
-	scat_hist(time[:], datalist1[:,i], 'k', 'Time (ns)', 'RGYR ($\AA$)', '%02d.%s.%s' %(i, system, selection), 'RGYR', 100)
+	scat_hist(time[:], datalist1[:,i], 'k', 'Time', 'RGYR', '%02d.%s.%s' %(i, system, selection), 'RGYR', num_b = 100, average = True, xunits = 'ns', yunits = '$\AA$')
 
 hist2d(datalist1[:,0],datalist1[:,1], 'Column 0 RGYR ($\AA$)', 'Column 1 RGYR ($\AA$)', 100, '%s.%s' %(system, selection), 'RGYR', False)
 
