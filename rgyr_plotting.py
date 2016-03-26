@@ -26,7 +26,7 @@ for i in range(nSteps):
 for i in range(len(sel)):
 	selection = sel[i][0]
 
-	plot_1d(time[:], datalist1[:,i], 'k', 'Time (ns)', 'RGYR ($\AA$)', '%02d.%s.%s' %(i, system, selection), 'RGYR')
+	plot_1d(time[:], datalist1[:,i], 'k', 'Time', 'RGYR', '%02d.%s.%s' %(i, system, selection), 'RGYR', xunits = 'ns', yunits = '$\AA$')
 
 	hist1d(datalist1[:,i], 'RGYR ($\AA$)', 100, '%02d.%s.%s' %(i, system, selection), 'RGYR', False)
 
