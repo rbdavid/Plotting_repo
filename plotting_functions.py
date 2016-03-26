@@ -33,7 +33,7 @@ def plot_1d(xdata, ydata, color, x_axis, y_axis, system, analysis, average = Fal
 	t0: index to begin averaging from; Default is 0
 	
 	kwargs:
-		xunits, yunits: string with correct math text describing the units for the x data
+		xunits, yunits: string with correct math text describing the units for the x/y data
 		x_lim, y_lim: list w/ two elements, setting the limits of the x/y ranges of plot
 		plt_title: string to be added as the plot title
 
@@ -67,13 +67,13 @@ def plot_1d(xdata, ydata, color, x_axis, y_axis, system, analysis, average = Fal
 		SDOM = SD/sqrt(len(ydata[t0:]))
 
 		plt.axhline(avg, xmin=0.0, xmax=1.0, c='r')
-		plt.figtext(0.775, 0.815, '%s\n%6.4f $\\pm$ %6.4f %s \nSD = %4.3f %s' %(analysis, avg, SDOM, y_units, SD, y_units), bbox=dict(boxstyle='square', ec='r', fc='w'), fontsize=12)
+		plt.figtext(0.680, 0.780, '%s\n%6.4f $\\pm$ %6.4f %s \nSD = %4.3f %s' %(analysis, avg, SDOM, y_units, SD, y_units), bbox=dict(boxstyle='square', ec='r', fc='w'), fontsize=12)
 
-	plt.savefig('%s.%s.tevol.png' %(system,analysis))
+	plt.savefig('%s.%s.plot1d.png' %(system,analysis))
 	plt.close()
 
 
-def hist1d(data, x_axis, num_b, system, analysis, norm):
+def hist1d(data, x_axis, num_b, system, analysis, norm = False, average = False, t0 = 0, **kwargs):
 	""" Creates a 1D histogram:
 
 	Usage: hist1d(data, x_axis, num_b, system, analysis, norm)
@@ -85,14 +85,44 @@ def hist1d(data, x_axis, num_b, system, analysis, norm):
 	system: descriptor for the system analyzed
 	analysis: descriptor for the analysis performed and plotted
 	norm = [False][True]; if False, plotting a frequency of data; if True, plotting a probability density
+	average: [False|True]; Default is False; if set to True, the function will calc the average, standard dev, and standard dev of mean of the y-data
+	t0: index to begin averaging from; Default is 0
+
+	kwargs:
+		xunits: string with correct math text describing the units for the x data
+		x_lim, y_lim: list w/ two elements, setting the limits of the x/y ranges of plot
+		plt_title: string to be added as the plot title
 
 	"""
 	
+	# INITIATING THE PLOT...
 	events, edges, patches = plt.hist(data, bins=num_b, histtype = 'bar', normed=norm)
+	
+	# READING IN KWARG DICTIONARY INTO SPECIFIC VARIABLES
+	for name, value in kwargs.items():
+		if name == 'xunits':
+			x_units = value
+			x_axis = '%s (%s)' %(x_axis, value)
+		elif name == 'x_lim':
+			plt.xlim(value)
+		elif name == 'y_lim':
+			plt.ylim(value)
+		elif name == 'plt_title':
+			plt.title(r'%s' %(value), size='14')
+	
 	plt.grid(b=True, which='major', axis='both', color='#808080', linestyle='--')
 	plt.xlabel(r'%s' %(x_axis), size=12)
-#	plt.title(r'something here...' %(system), size='14')
 
+	# CALCULATING THE AVERAGE/SD/SDOM OF THE Y-DATA
+	if average != False:
+		avg = np.sum(data[t0:])/len(data[t0:])
+		SD = stdev(data[t0:])
+		SDOM = SD/sqrt(len(data[t0:]))
+
+		plt.axvline(avg, ymin=0.0, ymax=1.0, c='r')
+		plt.figtext(0.680, 0.780, '%s\n%6.4f $\\pm$ %6.4f %s \nSD = %4.3f %s' %(analysis, avg, SDOM, x_units, SD, x_units), bbox=dict(boxstyle='square', ec='r', fc='w'), fontsize=12)
+	
+	
 	if norm == True:
 		plt.ylabel('Probability Density')
 		plt.savefig('%s.%s.prob1d.png' %(system,analysis))
