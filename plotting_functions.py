@@ -250,3 +250,25 @@ def hist2d(xdata, ydata, x_axis, y_axis, num_b, system, analysis, norm):
 	yedges = []
 	image = []
 
+def matrix2d(matrix,x_axis,y_axis,system,analysis)
+	""" Creates a 2D matrix image
+
+	Usage: matrix2d(matrix,x_axis,y_axis,system,analysis)
+
+	Arguments:
+	matrix: the data matrix to be plotted (should have shape of MxN, but can have MxNx3 or MxNx4)
+	x_axis, y_axis: strings to be printed on the axi labels
+	system: descriptor for the system analyzed
+	analysis: descriptor for the analysis performed and plotted
+	"""
+
+	my_cmap = plt.cm.get_cmap('jet')
+	my_cmap.set_under('w')
+	plt.imshow(matrix,cmap=my_cmap,vmin=0.001,interpolation='None',origin='lower')
+	cb1 = plt.colorbar()
+	plt.grid(b=True, which='major', axis='both', color='#808080', linestyle='--')
+	plt.xlabel(r'%s' %(x_axis), size=12)
+	plt.ylabel(r'%s' %(y_axis), size=12)
+	plt.savefig('%s.%s.matrix2d.png' %(system, analysis))
+	plt.close()
+
