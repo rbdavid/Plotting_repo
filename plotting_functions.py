@@ -250,7 +250,7 @@ def hist2d(xdata, ydata, x_axis, y_axis, num_b, system, analysis, norm):
 	yedges = []
 	image = []
 
-def matrix2d(matrix,x_axis,y_axis,system,analysis)
+def matrix2d(matrix,x_axis,y_axis,system,analysis):
 	""" Creates a 2D matrix image
 
 	Usage: matrix2d(matrix,x_axis,y_axis,system,analysis)
