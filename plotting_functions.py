@@ -53,6 +53,7 @@ def plot_1d(xdata, ydata, color, x_axis, y_axis, system, analysis, average = Fal
 		xunits, yunits: string with correct math text describing the units for the x/y data
 		x_lim, y_lim: list w/ two elements, setting the limits of the x/y ranges of plot
 		plt_title: string to be added as the plot title
+		draw_line: int value that determines the line style to be drawn; giving myself space to add more line styles if I decide I need them
 
 	"""
 	# INITIATING THE PLOT...
@@ -72,6 +73,12 @@ def plot_1d(xdata, ydata, color, x_axis, y_axis, system, analysis, average = Fal
 			plt.ylim(value)
 		elif name == 'plt_title':
 			plt.title(r'%s' %(value), size='14')
+		elif name == 'draw_line':
+			draw_line = value
+			if draw_line == 1:
+				plt.plot([0,max(ydata)],[0,max(ydata)],'r-',linewidth=2)
+			else:
+				print 'draw_line = %s has not been defined in plotting_functions script' %(line_value)
 	
 	plt.grid(b=True, which='major', axis='both', color='#808080', linestyle='--')
 	plt.xlabel(r'%s' %(x_axis), size=12)
@@ -337,8 +344,11 @@ def matrix2d(matrix, x_axis, y_axis, cb_axis, system, analysis, **kwargs):
 #	bgr.set_under('k')
 #	bgr.set_over('r')
 #	bgr.set_over('w')
+#	my_cmap = bgr
 
-	bgr = plt.cm.get_cmap('gray')
+#	my_cmap = plt.cm.get_cmap('jet')
+
+	my_cmap = plt.cm.get_cmap('gray')
 
 	# READING IN KWARG DICTIONARY INTO SPECIFIC VARIABLES
 	for name, value in kwargs.items():
@@ -352,8 +362,8 @@ def matrix2d(matrix, x_axis, y_axis, cb_axis, system, analysis, **kwargs):
 		elif name == 'plt_title':
 			plt.title(r'%s' %(value), size='14')
 	
-	plt.imshow(matrix,cmap=bgr,vmin=vmin,vmax=vmax,interpolation='none',origin='lower')
-	cb1 = plt.colorbar(extend='max',cmap=bgr)
+	plt.imshow(matrix,cmap=my_cmap,vmin=vmin,vmax=vmax,interpolation='none',origin='lower')
+	cb1 = plt.colorbar(extend='max',cmap=my_cmap)
 	cb1.set_label(r'%s' %(cb_axis), size=12)
 	plt.grid(b=True, which='major', axis='both', color='#808080', linestyle='--')
 	plt.xlabel(r'%s' %(x_axis), size=12)
