@@ -282,7 +282,7 @@ def bar(xdata, ydata, x_axis, y_axis, system, analysis, **kwargs):
 	plt.xlabel(r'%s' %(x_axis),size=12)
 
 	plt.savefig('%s.%s.bar.png' %(system,analysis),dpi=300)
-
+	plt.close()
 
 def hist2d(xdata, ydata, x_axis, y_axis, num_b, system, analysis, norm):
 	""" Creates a 2D histogram (heat map)
