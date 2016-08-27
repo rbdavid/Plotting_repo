@@ -1,0 +1,5 @@
+
+# TO DO FILE:
+# -- Fix bugs for the average arguments in the 1d-plot, hist1d, and scat_hist functions; currently, units of the average value must be fed into the function; if units aren't declared, the function will crash.
+# -- Naming of variables in the functions is a little illogical; a good example: xunits are arguments read into the function and x_units is the variable created within the function; just dumb...
+

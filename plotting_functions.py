@@ -46,7 +46,7 @@ def plot_1d(xdata, ydata, color, x_axis, y_axis, system, analysis, average = Fal
 	x_axis, y_axis: strings to be used for the axis label
 	system: descriptor for the system that produced the data
 	analysis: descriptor for the analysis that produced the data
-	average: [False|True]; Default is False; if set to True, the function will calc the average, standard dev, and standard dev of mean of the y-data
+	average: [False|True]; Default is False; if set to True, the function will calc the average, standard dev, and standard dev of mean of the y-data	# THERE IS A BUG IF average=True; must read in yunits for this function to work at the moment.
 	t0: index to begin averaging from; Default is 0
 	
 	kwargs:
@@ -178,7 +178,7 @@ def scat_hist(xdata, ydata, color, x_axis, y_axis, system, analysis, num_b = 100
 	system: descriptor for the system analyzed
 	analysis: descriptor for the analysis performed and plotted
 	num_b: number of bins to be used when binning the data; Default is 100
-	average: [False|True]; Default is False; if set to True, the function will calc the average, standard dev, and standard dev of mean of the y-data
+	average: [False|True]; Default is False; if set to True, the function will calc the average, standard dev, and standard dev of mean of the y-data	# THERE IS A BUG; if average = True, need to read in xunits for this function to work...
 	t0: index to begin averaging from; Default is 0
 	
 	kwargs:
