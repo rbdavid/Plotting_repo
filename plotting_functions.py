@@ -362,12 +362,12 @@ def matrix2d(matrix, x_axis, y_axis, cb_axis, system, analysis, **kwargs):
 		elif name == 'plt_title':
 			plt.title(r'%s' %(value), size='14')
 	
-	plt.imshow(matrix,cmap=my_cmap,vmin=vmin,vmax=vmax,interpolation='none',origin='lower')
+	plt.pcolor(matrix,cmap=my_cmap,vmin=vmin,vmax=vmax) # ,interpolation='none',origin='lower'
 	cb1 = plt.colorbar(extend='max',cmap=my_cmap)
-	cb1.set_label(r'%s' %(cb_axis), size=12)
+	cb1.set_label(r'%s' %(cb_axis), size=14)
 	plt.grid(b=True, which='major', axis='both', color='#808080', linestyle='--')
-	plt.xlabel(r'%s' %(x_axis), size=12)
-	plt.ylabel(r'%s' %(y_axis), size=12)
-	plt.savefig('%s.%s.matrix2d.png' %(system, analysis),dpi=300)
+	plt.xlabel(r'%s' %(x_axis), size=14)
+	plt.ylabel(r'%s' %(y_axis), size=14)
+	plt.savefig('%s.%s.heatmap.png' %(system, analysis),dpi=300)
 	plt.close()
 
